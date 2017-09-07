@@ -24,7 +24,7 @@ for i=1:m,
     J = J - sum(y(i) * log(sigmoid(X(i,:) * theta))+(1-y(i))*log(1-sigmoid(X(i,:) * theta)));
 end;
 
-J = J/m;
+J = J/m + lambda /(2*m) * (sum(theta .^2)-theta(1)^2);
 
 for j=1:n,
     grad(j) = 1/m *sum((sigmoid(X * theta)-y).*X(:,j));
