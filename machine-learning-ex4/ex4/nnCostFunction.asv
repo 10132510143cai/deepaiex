@@ -82,22 +82,19 @@ for i=1:m,
     % Caculate the backpropration
     error_term3 = h_theta - tempy(i,:);
     error_term2 = error_term3 * Theta2(:,2:end) .* sigmoidGradient(z_theta2);
-    delta2 = delta2 + error_term3' * [ones(1,1) a_theta2];
+    delta2 = delta2 + error_term3' * a_theta2;
     delta1 = delta1 + error_term2' * X(i,:);
     % delta2 dimension 10*25; delta1 dimension 25*400
 end;
 
 J = J/m + lambda /(2*m) * (sum(sum(Theta1 .^2)) + sum(sum(Theta2 .^2)) - sum(Theta1(:,1).^2) - sum(Theta2(:,1).^2));
-temptheta1 = Theta1;
-temptheta1(:,1) = 0; 
-temptheta2 = Theta2;
-temptheta2(:,1) = 0; 
-Theta2_grad = 1/m*delta2 + lambda / m * temptheta2;
-Theta1_grad = 1/m*delta1 + lambda / m * temptheta1;
+Theta1_grad = [zeros(num_labels,)] = 
 % -------------------------------------------------------------
 
 % =========================================================================
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
+
+
 end
