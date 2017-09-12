@@ -20,11 +20,8 @@ grad = zeros(size(theta));
 
 J = 1/(2* m) * (sum((X * theta - y) .^2) + lambda * (sum(theta .^2)- theta(1)^2));
 
-for iter=2:size(X,2),
-    grad(iter) = 1/m * sum((X * theta - y).* X(:,iter)) + lambda/m * theta(iter);
-end;
-grad(1) = 1/m *sum((X * theta - y).* X(:,1));
-
+grad(1) = 1/m *sum((X * theta - y)*X(:,1));
+grad()
 
 
 
